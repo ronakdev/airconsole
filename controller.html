@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Controller
+		</title>
+	</head>
+
+	<body>
+		<img src="https://compass-ssl.xbox.com/assets/38/d7/38d7f45b-bea1-4323-a1fd-61701bc2ec31.jpg?n=X1-Wireless-Controller-Covert-Forces_gallery_1056x594_01.jpg" style="width: 100%; height: 100%;"/>
+	</body>
+	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+	<script type="text/javascript">
+	var air_console = new AirConsole();
+
+	// Send a message to the screen
+	air_console.message(AirConsole.SCREEN, "How are you?");
+
+	// Listen for messages
+	air_console.onMessage = function(from, data) {
+
+	  // Show message on device screen
+	  var info = document.createElement('DIV');
+	  info.innerHTML = data;
+	  document.body.appendChild(info);
+	};
+	</script>
+</html>
