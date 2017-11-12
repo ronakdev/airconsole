@@ -15,7 +15,7 @@
 
 	// Listen for messages from other devices
 	air_console.onMessage = function(from, data) {
-
+		alert(data)
 	  // We receive a message -> Send message back to the device
 	  air_console.message(from, "Full of pixels!");
 
