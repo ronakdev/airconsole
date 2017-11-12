@@ -51,6 +51,7 @@ function main() {
                     keyCode = 16
                 }
             }
+            commandsSent = ""
             check({keyCode: keyCode})
         }
         // build phase
