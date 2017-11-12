@@ -51,6 +51,7 @@ function main() {
                     keyCode = 16
                 }
             }
+            check({keyCode: keyCode})
         }
         // build phase
         let formattedTime = ((currentPhaseTime - timePassed) / 1000)
