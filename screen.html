@@ -9,6 +9,7 @@
       var canvas;
       var last = null;
       var score_el;
+      var commandsSent = "";
       /**
        * Sets up the communication to game pads.
        */
@@ -31,7 +32,9 @@
 
           if (player != undefined && data.command !== undefined) {
  			console.log(player)    
-         	console.log(data)
+         	console.log(data.command)
+
+          commandsSent = player.toString() + "-" + data.command
          	document.getElementById("data").innerHTML = ("Player: " + player + ", Data: " + data.command)
       		}
         };
@@ -102,12 +105,30 @@
     </script>
    
   </head>
-  <body onload="init()">
-    <div class="game">
-    <h1 class="data">Nothing Sent</h1>
-      <canvas id="canvas"></canvas>
-      <div id="score">0:0</div>
-      <div id="wait"></div>
-    </div>
-  </body>
+  <body onload="init()" style="text-align: center;">
+        <div class="row">
+            <div class="col">
+                <b>Player 1</b></br>
+                <span><span id="p1blocks">40</span> blocks left</span>
+            </div>
+            
+            <div class="col">
+                <h3><span id="time">60</span> seconds left of <span id="phase">build</span> phase left</h3>
+            </div>
+            
+            <div class="col">
+                <b>Player 2</b><br/>
+                <span><span id="p2blocks">40</span> blocks left</span>
+            </div>
+            
+        </div>
+        
+        <canvas id="canvas" width=1000 height=600>
+            
+        </canvas>
+    </body>
+    <script src="js/setup.js"></script>
+    <script src="js/draw.js"></script>
+    <script src="js/control.js"></script>
+    <script src="js/game.js"></script>
 </html>
