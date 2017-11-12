@@ -15,9 +15,6 @@ for (var o = 0; o < 100; o++) {
     }
 }
 
-board.checkEnclosed = () => {
-    // super complicated method
-}
 var player1 = {
     cursor: {
         direction: 'none',
@@ -25,7 +22,9 @@ var player1 = {
         oldX: 30, oldY: 30
     },
     blocksLeft: 40,
-    id: "player2"
+    wallsPlaced: 0,
+    enclosedSpace: 0,
+    id: "player1"
 } //
 var player2 = {
     cursor: {
@@ -33,6 +32,8 @@ var player2 = {
         x: 90, y: 30,
         oldX: 90, oldY: 30
     },
+    enclosedSpace: 0,
+    wallsPlaced: 0,
     blocksLeft: 40,
     id: "player2"
 } //

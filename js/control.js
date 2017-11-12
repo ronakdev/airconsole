@@ -52,14 +52,13 @@ function check(e) { //http://keycode.info/
             player1.cursor.direction = "horizontal"
             player1.cursor.oldX = player1.cursor.x
             player1.cursor.x += 1; break;
-        case 88:
+        case 71: // g - place
             id = board[player1.cursor.x][player1.cursor.y];
             if (phase == "build") {
                 if ((id.includes("empty") || id.includes("enclosedSpace")) && player1.blocksLeft != 0){
-                    let eks = player1.cursor.x
-                    let why = player1.cursor.y
-                    board[eks][why] = "wall-player1-"+eks+"-"+why;
+                    board[player1.cursor.x][player1.cursor.y] = "wall-player1-"+player1.cursor.x+"-"+player1.cursor.y;
                     player1.blocksLeft -= 1
+                    player1.wallsPlaced += 1
                 }
             }
             else if (phase == "attackbuild") {
@@ -116,6 +115,7 @@ function check(e) { //http://keycode.info/
                     let why2 = player2.cursor.y
                     board[eks2][why2] = "wall-player2-"+eks2+"-"+why2;
                     player2.blocksLeft -= 1
+                    player2.wallsPlaced += 1
                 }
             }
             else if (phase == "attackbuild") {
