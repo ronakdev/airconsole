@@ -2,7 +2,6 @@ let buildTime = 10000//60000
 let attackBuildTime = 10000//30000
 let attackTime = 10000//30000
 var currentPhaseTime = 0
-var commandsSent = ""
 var round = 1
 function main() {
     // board has been created, players exist
