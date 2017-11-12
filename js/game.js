@@ -58,7 +58,7 @@ function main() {
                     keyCode = 68
                 }
                 else if (command == 'place') {
-                    keyCode = 88
+                    keyCode = 71
                 }
             }
             else if (player == 1) {
