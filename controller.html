@@ -3,92 +3,104 @@
   <script type="text/javascript"
           src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
   <script type="text/javascript">
-    navigator.vibrate = (navigator.vibrate ||
-                         navigator.webkitVibrate ||
-                         navigator.mozVibrate ||
-                         navigator.msVibrate);
+    
     var airconsole;
     /**
      * Sets up the communication to the screen.
      */
     function init() {
-      airconsole = new AirConsole({"orientation": "portrait"});
+      airconsole = new AirConsole({"orientation": "landscape"});
       /*
        * Checks if this device is part of the active game.
        */
       airconsole.onActivePlayersChange = function(player) {
-        var div = document.getElementById("player_id");
+        // var div = document.getElementById("player_id");
         if (player !== undefined) {
-          div.innerHTML =  (["Left Player", "Right Player"][player]);
+          // div.innerHTML =  (["Left Player", "Right Player"][player]);
         } else {
-          div.innerHTML = "It's a 2 player game!";
+          // div.innerHTML = "It's a 2 player game!";
         }
       };
       /*
        * Makes the device vibrate if the screen says so.
        */
-      airconsole.onMessage = function(from, data) {
-        if (from == AirConsole.SCREEN && data.vibrate) {
-          navigator.vibrate(data.vibrate);
-          console.log("Vibrating: " + data.vibrate);
-        }
-      };
+      // airconsole.onMessage = function(from, data) {
+      //   if (from == AirConsole.SCREEN && data.vibrate) {
+      //     navigator.vibrate(data.vibrate);
+      //     console.log("Vibrating: " + data.vibrate);
+      //   }
+      // };
     }
     /**
      * Tells the screen to move the paddle of this player.
      * @param amount
      */
-    function move(amount) {
-      airconsole.message(AirConsole.SCREEN, {move: amount})
+    function sendData(data) {
+      airconsole.message(AirConsole.SCREEN, {command: data})
     }
   </script>
-  <style type="text/css">
-    @font-face {
-      font-family: 'PressStart2P';
-      src: url('PressStart2P.ttf') format('truetype');
-      text-align: center;
-    }
-    html, body {
-      height: 100%;
-      margin: 0px;
-      font-family: 'PressStart2P', sans-serif;
-      color: white;
-      text-align: center;
-      background-color: black;
-    }
-    .button {
-      display: inline-block;
-      height: 45%;
-      width: 98%;
-      background-color: #222;
-      position: relative;
-    }
-    .button_label {
-      position: absolute;
-      left: 0px;
-      width: 100%;
-      top: 50%;
-      margin-top: -6px;
-    }
-    #player_id {
-      position: absolute;
-      top: 50%;
-      left: 0%;
-      width: 100%;
-      margin-top: -8px;
-      color: #777;
-    }
-  </style>
+  
 </head>
 <body onload="init()">
-<div style="height: 1%"></div>
-<div class=button ontouchstart="move(-50)" ontouchend="move(0)" onmousedown="move(-50)" onmouseup="move(0)">
-  <div class="button_label">UP</div>
-</div>
-<div style="height: 8%"></div>
-<div class=button ontouchstart="move(50)" ontouchend="move(0)" onmousedown="move(50)" onmouseup="move(0)">
-  <div class="button_label">DOWN</div>
-</div>
-<div id="player_id">It's a 2 player game</div>
+
+    <!--Make your links here-->
+    <p>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <a href="#!" onclick="sendData('up')">
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/34-200.png" class="rotate270" width="90">
+      </a>
+      <p></p>
+      <a href="#!" onclick="sendData('left')">
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/34-200.png" class="rotate180" width="90">
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#!" onclick="sendData('right')">
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/34-200.png" width="90">
+      </a>
+      &nbsp; &nbsp;
+      <a href="#!" onclick="sendData('place')">
+        <img src="https://github.com/nLevin13/CodeDayFallRNR/raw/gh-pages/placebutton.png" width="240">
+      </a>
+      <p>
+
+      </p>
+      &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#!" onclick="sendData('down')">
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/34-200.png" class="rotate90" width="90">
+
+      </a>
+
+    </p>
+
+
+  </body>
+<style>
+  .rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+    </style>
+    
+    <style>
+    .rotate180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    }
+    </style>
+    <style>
+    .rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    }
+    </style>
 </body>
 </html>
