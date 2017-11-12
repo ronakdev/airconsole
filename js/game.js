@@ -1,6 +1,6 @@
-let buildTime = 15000//60000
-let attackBuildTime = 7500//30000
-let attackTime = 7500//30000
+let buildTime = 60000
+let attackBuildTime = 30000
+let attackTime = 30000
 var currentPhaseTime = 0
 
 function main() {
