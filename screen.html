@@ -85,19 +85,7 @@
       function init() {
         setupConsole();
         // Setting up the game. Nothing AirConsole specific.
-        canvas = document.getElementById("canvas");
-        score_el = document.getElementById("score");
-        paddles = [
-          { pos: {x: 10, y: 50}, move: {x: 0, y: 0 },
-            el: document.getElementById("player_1") },
-          { pos: {x: 190, y: 53}, move: {x: 0, y: 0 },
-            el: document.getElementById("player_2") } ];
-        ball = { pos: { x: 100, y: 50 }, move: {x: 0, y: 0 },
-          el: document.getElementById("ball") };
-        canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
-        window.onresize = (clearCanvas);
-        last = new Date().getTime();
+        
         // loop();
       }
       
