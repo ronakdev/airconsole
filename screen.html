@@ -1,151 +1,134 @@
 <html>
-  <head>
+
+<head>
     <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
     <script type="text/javascript">
-      var airconsole;
-      var paddles;
-      var ball;
-      var score = [0, 0];
-      var last = null;
-      var score_el;
-      var commandsSent = "";
-      /**
-       * Sets up the communication to game pads.
-       */
-      function setupConsole() {
-        airconsole = new AirConsole();
-        airconsole.onConnect = function(device_id) {
-          checkTwoPlayers();
-        };
-        airconsole.onDisconnect = function(device_id) {
-          var player = airconsole.convertDeviceIdToPlayerNumber(device_id);
-          if (player != undefined) {
-            // Player that was in game left the game.
-            // Setting active players to length 0.
-            airconsole.setActivePlayers(0);
-          }
-          checkTwoPlayers();
-        };
-        airconsole.onMessage = function(device_id, data) {
-          var player = airconsole.convertDeviceIdToPlayerNumber(device_id)
+        var airconsole;
+        var commandsSent = "";
+        /**
+         * Sets up the communication to game pads.
+         */
+        function setupConsole() {
+            airconsole = new AirConsole();
+            airconsole.onConnect = function(device_id) {
+                checkTwoPlayers();
+            };
+            airconsole.onDisconnect = function(device_id) {
+                var player = airconsole.convertDeviceIdToPlayerNumber(device_id);
+                if (player != undefined) {
+                    // Player that was in game left the game.
+                    // Setting active players to length 0.
+                    airconsole.setActivePlayers(0);
+                }
+                checkTwoPlayers();
+            };
+            airconsole.onMessage = function(device_id, data) {
+                var player = airconsole.convertDeviceIdToPlayerNumber(device_id)
 
-          if (player != undefined && data.command !== undefined) {
- 			console.log(player)    
-         	console.log(data.command)
+                if (player != undefined && data.command !== undefined) {
+                    console.log(player)
+                    console.log(data.command)
 
-          commandsSent = player.toString() + "-" + data.command
-         	document.getElementById("data").innerHTML = ("Player: " + player + ", Data: " + data.command)
-      		}
-        };
-      }
-      /**
-       * Checks if two players are connected!
-       */
-      function checkTwoPlayers() {
-        var active_players = airconsole.getActivePlayerDeviceIds();
-        var connected_controllers = airconsole.getControllerDeviceIds();
-        // Only update if the game didn't have active players.
-        if (active_players.length == 0) {
-          if (connected_controllers.length >= 2) {
-            // Enough controller devices connected to start the game.
-            // Setting the first 2 controllers to active players.
-            airconsole.setActivePlayers(2);
-            resetBall(50, 0);
-            score = [0, 0];
-            score_el.innerHTML = score.join(":");
-            document.getElementById("wait").innerHTML = "";
-          } else if (connected_controllers.length == 1) {
-            document.getElementById("wait").innerHTML = "Need 1 more player!";
-            resetBall(0, 0);
-          } else if (connected_controllers.length == 0) {
-            document.getElementById("wait").innerHTML = "Need 2 more players!";
-            resetBall(0, 0);
-          }
+                    commandsSent = player.toString() + "-" + data.command
+                }
+            };
         }
-      }
-      /**
-       * Sends a message to the device that it should vibrate;
-       */
-      
-      /**
-       * Shows who scored and updates the score afterwards.
-       */
-      function displayScore(player) {
-        var name = airconsole.getNickname(
-            airconsole.convertPlayerNumberToDeviceId(player));
-        score_el.innerHTML = "<div style='font-size: 20px;margin-top:16px'>" +
-                             name + " scored!</div>";
-        window.setTimeout(function() {
-          score_el.innerHTML = score.join(":");
-        }, 1000);
-      }
-      /**
-       * body.onload function.
-       */
-      function init() {
-        setupConsole();
-        // Setting up the game. Nothing AirConsole specific.
-        
-        // loop();
-      }
-      
-    </script>
-   
-  </head>
-  <style>
-            body {
-              overflow: hidden;
-              margin: 0;
-              padding: 0;
+        /**
+         * Checks if two players are connected!
+         */
+        function checkTwoPlayers() {
+            var active_players = airconsole.getActivePlayerDeviceIds();
+            var connected_controllers = airconsole.getControllerDeviceIds();
+            // Only update if the game didn't have active players.
+            if (active_players.length == 0) {
+                if (connected_controllers.length >= 2) {
+                    // Enough controller devices connected to start the game.
+                    // Setting the first 2 controllers to active players.
+                    airconsole.setActivePlayers(2);
+                }
             }
-            #time  {
-              color: blue;
-              font-family: courier;
-              font-size: 300%;
-            }
-            .row {
-                display: table;
-                text-align: center;
-                table-layout: fixed;
-                width: 100%;
-                border-spacing: 10px;
-            }
-            .col {
-                display: table-cell;
-            }
-        </style>
-  <body onload="init()" style="text-align: center;">
-        
-    <div class="row">
-            <div class="col">
-                <b>Player 1</b></br>
-                <span><span id="p1blocks">40</span> blocks left</span></br>
-                <span><span id="p1space">0</span> space occupied</span>
-                
-            </div>
-            
-            <div class="col">
-                <h3><span id="time">60</span> seconds left of <span id="phase">build</span> phase left</h3>
-            </div>
-            
-            <div class="col">
-                <b>Player 2</b><br/>
-                <span><span id="p2blocks">40</span> blocks left</span></br>
-                <span><span id="p2space">0</span> space occupied</span>
+        }
+        /**
+         * Sends a message to the device that it should vibrate;
+         */
 
-            </div>
-            
+        /**
+         * Shows who scored and updates the score afterwards.
+         */
+
+        /**
+         * body.onload function.
+         */
+        function init() {
+            setupConsole();
+            // Setting up the game. Nothing AirConsole specific.
+
+            // loop();
+        }
+    </script>
+
+</head>
+<style>
+    body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    #time {
+        color: blue;
+        font-family: courier;
+        font-size: 300%;
+    }
+
+    .row {
+        display: table;
+        text-align: center;
+        table-layout: fixed;
+        width: 100%;
+        border-spacing: 10px;
+    }
+
+    .col {
+        display: table-cell;
+    }
+</style>
+
+<body onload="init()" style="text-align: center;">
+
+    <div class="row">
+        <div class="col">
+            <b>Player 1</b></br>
+            <span><span id="p1blocks">40</span> blocks left</span>
+            </br>
+            <span><span id="p1space">0</span> space occupied</span>
+
         </div>
-        
-        <canvas id="canvas" width=1000 height=600>
+
+        <div class="col">
+            <h3><span id="time">60</span> seconds left of <span id="phase">build</span> phase left</h3>
+        </div>
+
+        <div class="col">
+            <b>Player 2</b><br/>
+            <span><span id="p2blocks">40</span> blocks left</span>
+            </br>
+            <span><span id="p2space">0</span> space occupied</span>
+
+        </div>
+
+    </div>
+
+    <canvas id="canvas" width=1000 height=600>
             
         </canvas>
-    </body>
-    
-    <p id="time">60</p> 
-    <script src="js/setup.js"></script>
-    <script src="js/draw.js"></script>
-    <script src="js/control.js"></script>
-    <script src="js/checkEnclosed.js"></script>
-    <script src="js/game.js"></script>
+</body>
+
+<p id="time">60</p>
+<script src="js/setup.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/control.js"></script>
+<script src="js/checkEnclosed.js"></script>
+<script src="js/game.js"></script>
+
 </html>

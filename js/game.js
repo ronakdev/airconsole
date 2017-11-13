@@ -102,5 +102,7 @@ function nextPhase() {
     round += 1
     board.encloseStuff()
     phase = "build"
+    player1.blocksLeft += player1.enclosedSpace * 0.5
+    player2.blocksLeft += player2.enclosedSpace * 0.5
 }
 main()

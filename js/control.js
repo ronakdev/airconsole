@@ -55,7 +55,7 @@ function check(e) { //http://keycode.info/
         case 71: // g - place
             id = board[player1.cursor.x][player1.cursor.y];
             if (phase == "build") {
-                if ((id.includes("empty") || id.includes("enclosedSpace")) && player1.blocksLeft != 0){
+                if ((id.includes("empty") || id.includes("enclosedSpace")) && player1.blocksLeft >= 1){
                     board[player1.cursor.x][player1.cursor.y] = "wall-player1-"+player1.cursor.x+"-"+player1.cursor.y;
                     player1.blocksLeft -= 1
                     player1.wallsPlaced += 1
@@ -110,7 +110,7 @@ function check(e) { //http://keycode.info/
         case 16:
             id = board[player2.cursor.x][player2.cursor.y];
             if (phase == "build") {
-                if ((id.includes("empty") || id.includes("enclosedSpace")) && player2.blocksLeft != 0){
+                if ((id.includes("empty") || id.includes("enclosedSpace")) && player2.blocksLeft >= 1){
                     let eks2 = player2.cursor.x
                     let why2 = player2.cursor.y
                     board[eks2][why2] = "wall-player2-"+eks2+"-"+why2;
